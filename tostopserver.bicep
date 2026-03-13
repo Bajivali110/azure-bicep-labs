@@ -18,7 +18,7 @@ resource stopPostgresWorkflow 'Microsoft.Logic/workflows@2019-05-01' = {
             "interval": 1
             "schedule": {
               "hours": [21]
-              "minutes": [45]
+              "minutes": [55]
             }
           }
         }
