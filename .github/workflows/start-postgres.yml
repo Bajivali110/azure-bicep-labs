@@ -23,5 +23,5 @@ jobs:
         with:
           subscriptionId: f2a93436-f59f-4aa2-871c-f2ff233be392
           resourceGroupName: 17032026
-          template: ./start-postgres.bicep
+          template: ./start_server.bicep
           parameters: administratorLoginPassword=${{ secrets.POSTGRES_PASSWORD }}
