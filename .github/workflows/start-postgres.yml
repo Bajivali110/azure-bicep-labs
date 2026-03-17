@@ -2,7 +2,6 @@ name: Start PostgreSQL Server
 
 on:
   schedule:
-    # Start at 8:00 AM IST (2:30 AM UTC)
     - cron: '30 2 * * *'
   workflow_dispatch:
 
@@ -10,18 +9,13 @@ jobs:
   start-postgres:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep to Start Server
-        uses: azure/arm-deploy@v1
-        with:
-          subscriptionId: f2a93436-f59f-4aa2-871c-f2ff233be392
-          resourceGroupName: 17032026
-          template: ./start_server.bicep
-          parameters: administratorLoginPassword=${{ secrets.POSTGRES_PASSWORD }}
+      - name: Start PostgreSQL Server
+        run: |
+          az postgres flexible-server start \
+            --resource-group 17032026 \
+            --name bajiserver0
