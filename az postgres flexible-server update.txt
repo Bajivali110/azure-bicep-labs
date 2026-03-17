@@ -1,0 +1,27 @@
+az postgres flexible-server update \
+  --resource-group 03012026 \
+  --name bajiserevr12 \
+  --sku-name Standard_D2s_v3 \
+  --tier GeneralPurpose
+
+
+
+az dataprotection backup-vault create --resource-group 03012026 --vault-name postgres-backup-vault --location eastus --storage-settings datastore-type=VaultStore type=LocallyRedundant
+
+
+
+az postgres flexible-server create ^
+  --resource-group 03012026 ^
+  --name bajiserevr12 ^
+  --location eastus ^
+  --admin-user myadmin ^
+  --admin-password "YourSecureP@ssw0rd!" ^
+  --sku-name Standard_D2s_v3 ^
+  --tier GeneralPurpose ^
+  --version 17 ^
+  --storage-size 32 ^
+  --backup-retention 7 ^
+  --public-access 0.0.0.0 ^
+  --high-availability Disabled ^
+  --zone 1 ^
+  --tags Environment=Production Application=MyApp
