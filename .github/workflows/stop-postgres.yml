@@ -1,0 +1,21 @@
+name: Stop PostgreSQL Server
+
+on:
+  schedule:
+    - cron: '30 15 * * *'
+  workflow_dispatch:
+
+jobs:
+  stop-postgres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Stop PostgreSQL Server
+        run: |
+          az postgres flexible-server stop \
+            --resource-group 18032026 \
+            --name bajiserver7
